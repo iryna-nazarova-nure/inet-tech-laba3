@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Середній стаж співробітників</title>
+</head>
+<body>
+    <h1>Введіть дані про співробітників</h1>
+    
+    <div id="employees">
+        <div>
+            <label for="name1">Прізвище співробітника 1:</label>
+            <input type="text" id="name1"><br>
+            <label for="date1">Дата прийому на роботу (РРРР-ММ-ДД):</label>
+            <input type="date" id="date1"><br><br>
+        </div>
+        
+        <div>
+            <label for="name2">Прізвище співробітника 2:</label>
+            <input type="text" id="name2"><br>
+            <label for="date2">Дата прийому на роботу (РРРР-ММ-ДД):</label>
+            <input type="date" id="date2"><br><br>
+        </div>
+
+        <div>
+            <label for="name3">Прізвище співробітника 3:</label>
+            <input type="text" id="name3"><br>
+            <label for="date3">Дата прийому на роботу (РРРР-ММ-ДД):</label>
+            <input type="date" id="date3"><br><br>
+        </div>
+
+        <div>
+            <label for="name4">Прізвище співробітника 4:</label>
+            <input type="text" id="name4"><br>
+            <label for="date4">Дата прийому на роботу (РРРР-ММ-ДД):</label>
+            <input type="date" id="date4"><br><br>
+        </div>
+
+        <div>
+            <label for="name5">Прізвище співробітника 5:</label>
+            <input type="text" id="name5"><br>
+            <label for="date5">Дата прийому на роботу (РРРР-ММ-ДД):</label>
+            <input type="date" id="date5"><br><br>
+        </div>
+    </div>
+
+    <button onclick="calculateAverageExperience()">Розрахувати середній стаж</button>
+
+    <h2 id="result"></h2>
+
+    <script>
+        function calculateAverageExperience() {
+            const currentDate = new Date();
+            let totalYears = 0;
+            let employeeCount = 5;
+            
+            for (let i = 1; i <= employeeCount; i++) {
+                let startDate = new Date(document.getElementById(`date${i}`).value);
+                if (!isNaN(startDate)) {
+                    let yearsWorked = currentDate.getFullYear() - startDate.getFullYear();
+                    if (currentDate.getMonth() < startDate.getMonth() || 
+                        (currentDate.getMonth() === startDate.getMonth() && currentDate.getDate() < startDate.getDate())) {
+                        yearsWorked--;
+                    }
+                    totalYears += yearsWorked;
+                }
+            }
+
+            let averageExperience = Math.floor(totalYears / employeeCount);
+            document.getElementById('result').innerText = `Середній стаж співробітників: ${averageExperience} років`;
+        }
+    </script>
+</body>
+</html>
